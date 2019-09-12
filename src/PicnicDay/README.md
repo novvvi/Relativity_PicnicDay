@@ -83,3 +83,21 @@ the connecting string to azure is different from mysql connection
 
 ---
 
+### 09/11/2019
+#### All the bootstrap and angular issue has fixed.
+   * Overflow with different size screen  
+   * all the objects display in the right div box  
+   
+   
+#### Data from WeatherAPI and Ourairport issue
+   * WeatherAPI - if there are 0 wind, the"deg" in JSON response  
+   will disappear.  
+   * Ouraiport sometime will release a empty table.
+   
+#### Removed duplicating Runway direction  
+   * Some airports will have multi runway facing same direction
+
+
+#### Added Picture to airport current weather
+   * UI/UX - User will understand immediately
+
