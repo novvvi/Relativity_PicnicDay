@@ -12,3 +12,6 @@ C:\Users\noveh\Dropbox\project\picnicDay\PicnicDaySln\test\PicnicDay.Test\obj\De
 C:\Users\noveh\Dropbox\project\picnicDay\PicnicDaySln\test\PicnicDay.Test\obj\Debug\netcoreapp2.2\PicnicDay.Test.AssemblyInfo.cs
 C:\Users\noveh\Dropbox\project\picnicDay\PicnicDaySln\test\PicnicDay.Test\obj\Debug\netcoreapp2.2\PicnicDay.Test.dll
 C:\Users\noveh\Dropbox\project\picnicDay\PicnicDaySln\test\PicnicDay.Test\obj\Debug\netcoreapp2.2\PicnicDay.Test.pdb
+C:\Users\noveh\Dropbox\project\picnicDay\PicnicDaySln\test\PicnicDay.Test\bin\Debug\netcoreapp2.2\PicnicDay.dll
+C:\Users\noveh\Dropbox\project\picnicDay\PicnicDaySln\test\PicnicDay.Test\bin\Debug\netcoreapp2.2\PicnicDay.pdb
+C:\Users\noveh\Dropbox\project\picnicDay\PicnicDaySln\test\PicnicDay.Test\obj\Debug\netcoreapp2.2\PicnicDay.Test.csproj.CopyComplete
