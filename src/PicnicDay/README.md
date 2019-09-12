@@ -99,5 +99,6 @@ the connecting string to azure is different from mysql connection
 
 
 #### Added Picture to airport current weather
-   * UI/UX - User will understand immediately
+   * UI/UX - User will understand immediately  
+   the weather situation without paying attention
 
