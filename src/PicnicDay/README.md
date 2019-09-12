@@ -83,7 +83,7 @@ the connecting string to azure is different from mysql connection
 
 ---
 
-### 09/11/2019
+### 09/09/2019 - 09/11/2019
 #### All the bootstrap and angular issue has fixed.
    * Overflow with different size screen  
    * all the objects display in the right div box  
@@ -99,6 +99,16 @@ the connecting string to azure is different from mysql connection
 
 
 #### Added Picture to airport current weather
-   * UI/UX - User will understand immediately  
-   the weather situation without paying attention
+   * UI/UX - User will immediately understand  
+   the weather situation without paying attention.
+
+
+---
+
+### 09/12/2019
+
+#### Learning Azure Ecosystem
+   * DevOps
+   * Learn CI CD pipline
+   * Deployment applications
 
