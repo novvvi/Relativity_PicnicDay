@@ -12,6 +12,26 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
+
+
+
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+  
+- script: |
+    dotnet build --configuration $(buildConfiguration)
+    npm install -g @angular/cli
+    npm install
+    ng build --prod
+  displayName: |
+    'dotnet build $(buildConfiguration)'
+    'npm install and build'
+
+
+
+
+
+
