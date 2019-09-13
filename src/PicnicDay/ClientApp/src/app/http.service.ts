@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { IResultInfo, IAirportInfo } from "./iresult";
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,11 @@ export class HttpService {
   
 
   getAirport(id) {
-    return this._h.get(this.baseUrl +"/api/airports/info/" + id)
+    return this._h.get<IAirportInfo>(this.baseUrl +"/api/airports/info/" + id)
   }
 
 
   getResult(id) {
-    return this._h.get(this.baseUrl +"/api/airports/result/" + id)
+    return this._h.get<IResultInfo>(this.baseUrl +"/api/airports/result/" + id)
   }
 }

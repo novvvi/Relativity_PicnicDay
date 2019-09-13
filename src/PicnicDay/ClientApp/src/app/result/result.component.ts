@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { HttpService } from "../http.service";
+import { IResultInfo, IAirportInfo } from "../iresult";
 
 
 @Component({
@@ -46,6 +47,7 @@ export class ResultComponent implements OnChanges, OnInit {
     let obs = this._hs.getResult(id);
     obs.subscribe(data => {
       this.resultInfo = data;
+      this.weatherImg = "../../assets/image/weather/" + data.weather +".png";
     })
   };
 
