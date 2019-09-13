@@ -29,6 +29,7 @@ steps:
     ng build --prod
   displayName: |
     'dotnet build $(buildConfiguration)'
+    'cd ClientApp/'
     'npm install and build'
 
 
