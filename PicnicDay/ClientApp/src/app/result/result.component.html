@@ -1,0 +1,56 @@
+<p style="font-size: 90px;"> {{airportInfo?.name}}</p>
+
+<div class="container airport-detail">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4">
+            <label>Weather</label>
+            <div style="margin-right: 5px; height: 90%;" class="row detail-box">
+                <img src="{{ weatherImg }}" alt="clouds" />
+                <p style="width: 100%;text-align: center; font-size: 20px;">{{resultInfo?.weather}}</p>
+
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8">
+            <label>Detail</label>
+            <div style=" height: auto; padding-bottom: -10px;" class="row detail-box">
+                <table  class="table">
+
+                    <tr>
+                        <th scope="row">Type</th>
+                        <td>{{airportInfo?.type}}</td>
+                        <th scope="row">Highest (F')</th>
+                        <td>{{resultInfo?.temp_max}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Location</th>
+                        <td>{{airportInfo?.municipality}} , {{airportInfo?.country}}</td>
+                        <th scope="row">Lowest (F')</th>
+                        <td>{{resultInfo?.temp_min}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Updated</th>
+                        <td>{{airportInfo?.updatedAt}}</td>
+                        <th scope="row">Speed (MPH)</th>
+                        <td>{{resultInfo?.speed}}</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+
+            <div class="row ">
+                <label style="margin-top: 10px;">Current Landing Direction</label>
+                <div style="width: 100%" class="detail-box">
+                    <div style="display: inline-block;" *ngFor="let d of resultInfo?.directions">
+                        <p class="direction">{{d}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
