@@ -58,21 +58,12 @@ namespace PicnicDay
 
 
             services.AddDbContextPool<PDDbContext>(options => options.UseSqlServer(Configuration["DBInfo:ConnectionString"]));
-            services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IBackgroundJobClient backgroundJobs, IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.Use(async (context, next) => {
-            await next();
-            if (context.Response.StatusCode == 404 &&
-                !Path.HasExtension(context.Request.Path.Value) &&
-                !context.Request.Path.Value.StartsWith("/api/")) {
-                    context.Request.Path = "/index.html";
-                    await next();
-                }
-            });
 
 
             app.UseHangfireDashboard();
@@ -87,9 +78,6 @@ namespace PicnicDay
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseMvcWithDefaultRoute();
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
 
 
             app.UseCors("MyPolicy");
