@@ -33,5 +33,5 @@ testem.log
 #System Files
 .DS_Store
 
-.dist
+/dist
 # End of https://www.gitignore.io/api/angular
