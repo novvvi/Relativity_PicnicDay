@@ -3,7 +3,7 @@ export interface IAirportInfo {
     type: string
     municipality: string
     country: string
-    updateAt: Date
+    updatedAt: Date
 }
 
 export interface IResultInfo {

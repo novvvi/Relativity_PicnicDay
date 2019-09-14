@@ -11,8 +11,8 @@ import { IResultInfo, IAirportInfo } from "../iresult";
 export class ResultComponent implements OnChanges, OnInit {
   @Input() airportid : string;
   _airportid : string;
-  airportInfo : object;
-  resultInfo : object;
+  airportInfo : IAirportInfo;
+  resultInfo : IResultInfo;
   weatherImg: string;
 
 
@@ -51,5 +51,6 @@ export class ResultComponent implements OnChanges, OnInit {
     })
   };
 
-  
+
 }
+
