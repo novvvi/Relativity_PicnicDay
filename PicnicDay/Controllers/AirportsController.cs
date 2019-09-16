@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PicnicDay.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     [EnableCors("MyPolicy")]
     public class AirportsController : ControllerBase
