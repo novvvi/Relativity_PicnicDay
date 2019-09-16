@@ -79,7 +79,7 @@ namespace PicnicDay
                 app.UseHsts();
             }
 
-
+            app.UseHttpsRedirection();
             app.UseCors("MyPolicy");
             app.UseMvc();
         }
