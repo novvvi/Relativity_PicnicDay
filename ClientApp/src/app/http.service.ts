@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IResultInfo, IAirportInfo } from "./iresult";
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  readonly baseUrl = "http://localhost:5000";
+  readonly baseUrl = "https://localhost:5001";
 
   constructor(private _h: HttpClient) { }
   

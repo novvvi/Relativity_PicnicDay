@@ -42,7 +42,7 @@ namespace PicnicDay
                 options.AddPolicy("MyPolicy",
                 builder =>
                 {
-                    builder.WithOrigins("*")
+                    builder.WithOrigins("https://picnicday.azurewebsites.net", "http://localhost:4200", "https://localhost:4200")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials();
@@ -57,7 +57,10 @@ namespace PicnicDay
                     (resolver as DefaultContractResolver).NamingStrategy = null;
             });
 
-
+            services.AddHttpsRedirection(options =>
+            {
+                options.HttpsPort = 443;
+            });
             
 
             services.AddDbContextPool<PDDbContext>(options => options.UseSqlServer(Configuration["DBInfo:ConnectionString"]));
@@ -67,34 +70,32 @@ namespace PicnicDay
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IBackgroundJobClient backgroundJobs, IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.Use(async (context, next) => {
-                await next();
-                if (context.Response.StatusCode == 404 &&
-                    !Path.HasExtension(context.Request.Path.Value) &&
-                    !context.Request.Path.Value.StartsWith("/api/")) {
-                    context.Request.Path = "/index.html";
-                    await next();
-                }
-            });
 
 
             app.UseHangfireDashboard();
-            RecurringJob.AddOrUpdate(() => UpdateSqlService.BackgroundUpdateMssql(), Cron.Hourly);
+            RecurringJob.AddOrUpdate(() => UpdateSqlService.BackgroundUpdateMssql(), Cron.Minutely);
 
-            // if (env.IsDevelopment())
-            // {
-            //     app.UseDeveloperExceptionPage();
-            // }
-            // else
-            // {
-            //     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //     app.UseHsts();
-            // }
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
-            app.UseMvcWithDefaultRoute();
+
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
+
+
+            
             app.UseHttpsRedirection();
             app.UseCors("MyPolicy");
             app.UseMvc();
+
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
