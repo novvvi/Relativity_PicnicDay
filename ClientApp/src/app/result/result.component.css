@@ -6,6 +6,10 @@ p {
 }
 
 
+th {
+    width: 50%
+}
+
 .airport-detail {
     display: block;
     background-color: white;

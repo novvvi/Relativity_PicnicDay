@@ -14,6 +14,7 @@ export class ResultComponent implements OnChanges, OnInit {
   airportInfo : IAirportInfo;
   resultInfo : IResultInfo;
   weatherImg: string;
+  updatedAt: string;
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,6 +40,8 @@ export class ResultComponent implements OnChanges, OnInit {
     let obs = this._hs.getAirport(id);
     obs.subscribe(data => {
       this.airportInfo = data[0];
+      let date = data[0].updatedAt;
+      this.updatedAt = date.slice(0,10);
     })
   };
 
@@ -48,6 +51,7 @@ export class ResultComponent implements OnChanges, OnInit {
     obs.subscribe(data => {
       this.resultInfo = data;
       this.weatherImg = "../../assets/image/weather/" + data.weather +".png";
+      
     })
   };
 
