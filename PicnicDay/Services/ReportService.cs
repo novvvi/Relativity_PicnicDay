@@ -189,7 +189,7 @@ namespace PicnicDay.Services
                         Console.WriteLine($"\n degree: {identFormat}\n");
 
                         // check if runway are within 90 range of wind"
-                        if (result < 50)
+                        if (result > 90)
                         {
                             int caridenalIndex = (int)Math.Round(((double)identDegree % 360) / 45);
                             if (identList.IndexOf(caridnals[caridenalIndex]) == -1)
