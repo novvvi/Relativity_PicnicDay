@@ -31,24 +31,6 @@ namespace PicnicDay.Services
 
         }
 
-        // public static Result CombineData(Airport[] data)
-        // {
-        //     ReportService service = new ReportService(data);
-        //     List<string> directions = service.FormatToList();
-        //     Task task = service.GetWeathers();
-        //     Weather weather = service.weatherData;
-        //     List<string> landingDirections = service.runWay(directions, weather.degree);
-        //     Result result = new Result()
-        //     {
-        //         directions = landingDirections,
-        //         speed = weather.speed,
-        //         temp_max = weather.tempMax,
-        //         temp_min = weather.tempMin,
-        //         weather = weather.weather
-        //     };
-            
-        //     return result;
-        // }
 
 
         public static Result CombineData(Airport[] data)
@@ -207,7 +189,7 @@ namespace PicnicDay.Services
                         Console.WriteLine($"\n degree: {identFormat}\n");
 
                         // check if runway are within 90 range of wind"
-                        if (result > 90)
+                        if (result < 50)
                         {
                             int caridenalIndex = (int)Math.Round(((double)identDegree % 360) / 45);
                             if (identList.IndexOf(caridnals[caridenalIndex]) == -1)
