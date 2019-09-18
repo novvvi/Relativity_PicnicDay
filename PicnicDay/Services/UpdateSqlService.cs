@@ -66,7 +66,17 @@ namespace PicnicDay.Services
             .Descendants("dt").First()
             .Descendants("span").First().InnerText;
             
-            string updatedAt = _context.Airports.First().updatedAt.ToString("MMM d, yyyy");
+            string updatedAt;
+
+            if( !_context.Airports.Any() )
+            {
+                updatedAt = "";
+            }
+            else
+            {
+                updatedAt = _context.Airports.First().updatedAt.ToString("MMM d, yyyy");
+            }
+            
             string unformatDate = datetimeinString.Substring(datetimeinString.Length - 13, 12);
             
             Console.WriteLine(updatedAt);
@@ -74,6 +84,7 @@ namespace PicnicDay.Services
             Regex regex = new Regex("[ ]{2,}", options);
             string latestVersion = regex.Replace(unformatDate, " ");
             Console.WriteLine(latestVersion);
+
 
             if(updatedAt == latestVersion)
             {
