@@ -32,11 +32,7 @@ namespace PicnicDay.Services
             else
             {
                 Console.WriteLine("Info: New Version is out, processing update...");
-                if (update.CheckForUpdate() == "false")
-                {
-                    update.ClearAllRunways();
-                    update.ClearAllAirports();
-                }
+
                 update.Download();
                 List<Airport> airportList = update.AirportData();
                 List<Runway> runwayList = update.RunwayData();
@@ -44,6 +40,11 @@ namespace PicnicDay.Services
                 string checkifRunwayEmpty = airportList[1].airport_id;
                 if (checkifAirportEmpty != "" && checkifRunwayEmpty != "")
                 {
+                    if (update.CheckForUpdate() == "false")
+                    {
+                        update.ClearAllRunways();
+                        update.ClearAllAirports();
+                    }
                     update.BulkInsertData(airportList, runwayList);
                     Console.WriteLine("Info: Successfully Update ...");
                 }
