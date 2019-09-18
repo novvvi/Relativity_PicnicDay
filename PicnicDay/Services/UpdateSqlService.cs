@@ -25,25 +25,32 @@ namespace PicnicDay.Services
             PDDbContext context = PDDbContext.DbConnect();
             UpdateSqlService update = new UpdateSqlService(context);
 
-            if(update.CheckForUpdate())
+            if(update.CheckForUpdate() == "true")
             {
                 Console.WriteLine("Info: Mssql data is the latest version ...");
             }
             else
             {
                 Console.WriteLine("Info: New Version is out, processing update...");
-                update.ClearAllRunways();
-                update.ClearAllAirports();
+                if (update.CheckForUpdate() == "false")
+                {
+                    update.ClearAllRunways();
+                    update.ClearAllAirports();
+                }
                 update.Download();
                 List<Airport> airportList = update.AirportData();
                 List<Runway> runwayList = update.RunwayData();
-                update.BulkInsertData(airportList, runwayList);
-                Console.WriteLine("Info: Successfully Update ...");
+                string checkifAirportEmpty = airportList[1].airport_id;
+                string checkifRunwayEmpty = airportList[1].airport_id;
+                if (checkifAirportEmpty != "" && checkifRunwayEmpty != "")
+                {
+                    update.BulkInsertData(airportList, runwayList);
+                    Console.WriteLine("Info: Successfully Update ...");
+                }
             }
-            
         }
 
-        public bool CheckForUpdate()
+        public string CheckForUpdate()
         {
             Console.WriteLine("Info: Checking OurAirport.com for latest version ...");
             RegexOptions options = RegexOptions.None;
@@ -70,11 +77,15 @@ namespace PicnicDay.Services
 
             if(updatedAt == latestVersion)
             {
-                return true;
+                return "true";
+            }
+            else if (updatedAt == "")
+            {
+                return "null";
             }
             else
             {
-                return false;
+                return "false";
             }
         }
 

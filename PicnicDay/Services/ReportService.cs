@@ -139,6 +139,7 @@ namespace PicnicDay.Services
 
             Regex checkRgx = new Regex(@"^\d{1}");
             string[] caridnals = { "N", "NE", "E", "SE", "S", "SW", "W", "NW", "N" };
+            List<string> notInRangeReturnList = identList;
 
 
             if (checkRgx.IsMatch(identList[0]) || identList[0].IndexOf("H") == 0)
@@ -199,7 +200,7 @@ namespace PicnicDay.Services
                             else
                             {
                                 identList.RemoveAt(i);
-                                Console.WriteLine("**esisted **");
+                                Console.WriteLine("**erased **");
                                 i --;
                             }
                             Console.WriteLine(identList[i]);
@@ -215,7 +216,15 @@ namespace PicnicDay.Services
                 // temperoary console logging
                 identList.ForEach(i => Console.Write("{0}\t", i));
 
-                return identList;
+                if (identList?.Any() != true)
+                {
+                    return notInRangeReturnList;
+                }
+                else
+                {
+                    return identList;
+                }
+                
             }
 
             else
@@ -234,7 +243,14 @@ namespace PicnicDay.Services
                 }
                 identList.ForEach(i => Console.Write("{0}\t", i));
 
-                return identList;
+                if (identList?.Any() != true)
+                {
+                    return notInRangeReturnList;
+                }
+                else
+                {
+                    return identList;
+                }
             }
         
         }

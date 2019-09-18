@@ -73,7 +73,7 @@ namespace PicnicDay
 
 
             app.UseHangfireDashboard();
-            RecurringJob.AddOrUpdate(() => UpdateSqlService.BackgroundUpdateMssql(), Cron.Minutely);
+            RecurringJob.AddOrUpdate(() => UpdateSqlService.BackgroundUpdateMssql(), Cron.Hourly);
 
             if (env.IsDevelopment())
             {
