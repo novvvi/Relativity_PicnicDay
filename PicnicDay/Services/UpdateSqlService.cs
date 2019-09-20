@@ -24,8 +24,9 @@ namespace PicnicDay.Services
         {
             PDDbContext context = PDDbContext.DbConnect();
             UpdateSqlService update = new UpdateSqlService(context);
+            string UpdateBool = update.CheckForUpdate();
 
-            if(update.CheckForUpdate() == "true")
+            if(UpdateBool == "true")
             {
                 Console.WriteLine("Info: Mssql data is the latest version ...");
             }
@@ -40,7 +41,7 @@ namespace PicnicDay.Services
                 string checkifRunwayEmpty = airportList[1].airport_id;
                 if (checkifAirportEmpty != "" && checkifRunwayEmpty != "")
                 {
-                    if (update.CheckForUpdate() == "false")
+                    if (UpdateBool == "false")
                     {
                         update.ClearAllRunways();
                         update.ClearAllAirports();
@@ -87,9 +88,9 @@ namespace PicnicDay.Services
             Console.WriteLine(latestVersion);
 
 
-            if(updatedAt == latestVersion)
+            if(updatedAt != latestVersion)
             {
-                return "true";
+                return "false";
             }
             else if (updatedAt == "")
             {
@@ -97,7 +98,7 @@ namespace PicnicDay.Services
             }
             else
             {
-                return "false";
+                return "true";
             }
         }
 

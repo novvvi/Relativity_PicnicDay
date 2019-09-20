@@ -231,6 +231,14 @@ namespace PicnicDay.Services
             {
                 Console.WriteLine("-------------------Caridnals");
                 int windIndex = (int)Math.Round(((double)windDirection % 360) / 45);
+                if (windIndex < 5)
+                {
+                    windIndex += 4;
+                }
+                else
+                {
+                    windIndex -= 4;
+                }
                 Console.WriteLine($"\n {caridnals[windIndex]} Direction \n");
                 for(int x = 0; x < identList.Count; x++)
                 {
