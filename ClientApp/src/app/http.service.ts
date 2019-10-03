@@ -8,7 +8,7 @@ import { IResultInfo, IAirportInfo } from "./iresult";
 })
 export class HttpService {
 
-  readonly baseUrl = "https://wjpicnicday.azurewebsites.net";
+  readonly baseUrl = "https://picnicday.azurewebsites.net";
 
   constructor(private _h: HttpClient) { }
   
