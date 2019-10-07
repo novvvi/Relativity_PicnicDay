@@ -62,7 +62,7 @@ namespace PicnicDay.Services
         }
 
 
-        private Weather Caching()
+        public Weather Caching()
         {
             ObjectCache cache = MemoryCache.Default;
             if (cache.Contains(airportId))
@@ -88,7 +88,7 @@ namespace PicnicDay.Services
         }
 
 
-        private async Task GetWeathers()
+        public async Task GetWeathers()
         {
             HttpClient apiClient = new HttpClient();
             apiClient.DefaultRequestHeaders.Accept.Clear();
@@ -107,7 +107,7 @@ namespace PicnicDay.Services
 
         }
 
-        private List<string> FormatToList()
+        public List<string> FormatToList()
         {
             List<string> directions = new List<string>();
             foreach(Runway runway in runwayData)
@@ -126,20 +126,13 @@ namespace PicnicDay.Services
         }
 
         
-        private List<string> runWay(List<string> identList, double windDirection)
+        public List<string> runWay(List<string> identList, double windDirection)
         {
-            // wind 360 = N , wind 0 = all direction
-            // pulling le & he ident data because there could be a chance as 90 degree 
-            // of wind blowing from the left or right to the runway.
-            // remove all the same number 
-            // remove all the Char
-            // 
-            
             
 
             Regex checkRgx = new Regex(@"^\d{1}");
-            string[] caridnals = { "N", "NE", "E", "SE", "S", "SW", "W", "NW", "N" };
-            List<string> notInRangeReturnList = identList;
+            string[] caridnals = { "N", "NE", "E", "SE", "S", "SW", "W", "NW", "N", "NE", "E", "SE" };
+            List<string> notInRangeReturnList = new List<string>(){"All"};
 
 
             if (checkRgx.IsMatch(identList[0]) || identList[0].IndexOf("H") == 0)
@@ -155,14 +148,14 @@ namespace PicnicDay.Services
                     if (identList[i].IndexOf("H") == 0)
                     {
                         Console.WriteLine("-----------------H1 check");
-                        if (identList.Count == 1)
+                        if (identList.IndexOf("All") == -1)
                         {
                             identList[0] = "All";
                         }
                         else
                         {
                             identList.RemoveAt(i);
-                            i -= 2;
+                            i --;
                         }
                     }
 
@@ -190,7 +183,7 @@ namespace PicnicDay.Services
                         Console.WriteLine($"\n degree: {identFormat}\n");
 
                         // check if runway are within 90 range of wind"
-                        if (result > 135 && result < 225)
+                        if (result > 130 && result < 230)
                         {
                             int caridenalIndex = (int)Math.Round(((double)identDegree % 360) / 45);
                             if (identList.IndexOf(caridnals[caridenalIndex]) == -1)
@@ -230,20 +223,24 @@ namespace PicnicDay.Services
             else
             {
                 Console.WriteLine("-------------------Caridnals");
+                
                 int windIndex = (int)Math.Round(((double)windDirection % 360) / 45);
-                if (windIndex < 5)
+                if (windIndex < 2)
                 {
-                    windIndex += 4;
+                    windIndex = windIndex + 8;
                 }
-                else
+                List<string> notInRange = new List<string>
                 {
-                    windIndex -= 4;
-                }
+                    caridnals[windIndex +2],
+                    caridnals[windIndex +1],
+                    caridnals[windIndex],
+                    caridnals[windIndex -1],
+                    caridnals[windIndex -2]
+                };
                 Console.WriteLine($"\n {caridnals[windIndex]} Direction \n");
                 for(int x = 0; x < identList.Count; x++)
                 {
-                    string breakStringToChar = caridnals[windIndex];
-                    if(identList[x].Intersect(breakStringToChar).Any() || identList[x].IndexOf(breakStringToChar) != -1)
+                    if(notInRange.IndexOf(identList[x]) != -1)
                     {
                         identList.RemoveAt(x);
                         x --;

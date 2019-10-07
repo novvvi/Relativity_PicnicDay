@@ -14,9 +14,9 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
 using PicnicDay.Models;
 using PicnicDay.Controllers;
-using Hangfire;
-using Hangfire.SqlServer;
-using Hangfire.AspNetCore;
+// using Hangfire;
+// using Hangfire.SqlServer;
+// using Hangfire.AspNetCore;
 using PicnicDay.Services;
 using System.IO;
 
@@ -34,8 +34,8 @@ namespace PicnicDay
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHangfire(x => x.UseSqlServerStorage(Configuration["DBInfo:ConnectionString"]));
-            services.AddHangfireServer();
+            // services.AddHangfire(x => x.UseSqlServerStorage(Configuration["DBInfo:ConnectionString"]));
+            // services.AddHangfireServer();
 
             services.AddCors(options =>
             {
@@ -67,8 +67,8 @@ namespace PicnicDay
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IBackgroundJobClient backgroundJobs, IApplicationBuilder app, IHostingEnvironment env)
+        // if needed to use Hangfire add this back to attribute IBackgroundJobClient backgroundJobs,
+        public void Configure( IApplicationBuilder app, IHostingEnvironment env) 
         {
 
 
